@@ -11,5 +11,9 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist'
+  },
+  // Supprimez toute référence à GEMINI_API_KEY
+  define: {
+    'import.meta.env.VITE_GEMINI_API_KEY': JSON.stringify('')
   }
 });
