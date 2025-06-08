@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portail Association Locale</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Montserrat', 'system-ui', 'sans-serif'],
+            heading: ['Poppins', 'system-ui', 'sans-serif'], 
+          },
+          colors: {
+            themeColors: {
+              // Light Theme
+              pageBgLight: 'var(--page-bg-light)', // Maps to user's --background
+              cardBgLight: 'var(--card-bg-light)', // Maps to user's --background (for general cards like stats)
+              blockSecondaryBgLight: 'var(--block-secondary-bg-light)', // NOW Maps to user's --background for specific section blocks
+
+              accentLight: 'var(--accent-color-light)', // Maps to user's --primary
+              accentHoverLight: 'var(--accent-color-hover-light)', // Derived from user's --primary
+              
+              textPrimaryLight: 'var(--text-primary-light)', // Maps to user's --text
+              textSecondaryLight: 'var(--text-secondary-light)', // Derived from user's --text
+              
+              borderLight: 'var(--border-color-light)', // Default border, maps to user's --secondary
+              
+              highlightLight: 'var(--highlight-color-light)', // Maps to user's --primary (used for general highlights, icons)
+              greenAccent2Light: 'var(--green-accent-2-light)', // Maps to user's --accent (for specific block borders, btn-secondary border)
+              greenAccent3Light: 'var(--green-accent-3-light)', // Complementary green for geometric art, btn-secondary background
+
+              // Dark Theme
+              pageBgDark: 'var(--page-bg-dark)', // Maps to user's --background
+              cardBgDark: 'var(--card-bg-dark)', // Maps to user's --background
+              blockSecondaryBgDark: 'var(--block-secondary-bg-dark)', // NOW Maps to user's --background for specific section blocks
+
+              accentDark: 'var(--accent-color-dark)', // Maps to user's --primary
+              accentHoverDark: 'var(--accent-color-hover-dark)', // Derived
+              
+              textPrimaryDark: 'var(--text-primary-dark)', // Maps to user's --text
+              textSecondaryDark: 'var(--text-secondary-dark)', // Derived
+              
+              borderDark: 'var(--border-color-dark)', // Default border, maps to user's --secondary
+              
+              highlightDark: 'var(--highlight-color-dark)', // Maps to user's --primary
+              greenAccent2Dark: 'var(--green-accent-2-dark)', // Maps to user's --accent (btn-secondary border)
+              greenAccent3Dark: 'var(--green-accent-3-dark)', // Complementary green for geometric art, btn-secondary background
+            },
+          },
+          borderRadius: {
+            'lg': '0.75rem', 
+            'xl': '1rem',   
+            '2xl': '1.5rem',
+            '3xl': '2rem',
+          },
+          boxShadow: {
+            'custom-light': '0 8px 16px -3px rgba(17, 24, 11, 0.08), 0 4px 8px -2px rgba(17, 24, 11, 0.05)', 
+            'custom-dark': '0 8px 16px -3px rgba(152, 219, 144, 0.1), 0 4px 8px -2px rgba(152, 219, 144, 0.07)',
+            'subtle-light': '0 4px 12px rgba(17, 24, 11, 0.05)',
+            'subtle-dark': '0 4px 12px rgba(78, 224, 62, 0.1)', // Adjusted for new accent
+          },
+          spacing: {
+            '18': '4.5rem',
+            '22': '5.5rem',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      /* User's New Palette - Light Theme */
+      --text: #11180b;
+      --background: #ffffff;
+      --primary: #80b84c;    /* Main actions, highlights, accentLight in TW */
+      --secondary: #b8d897;  /* Default borderLight in TW. For btn-secondary border. */
+      --accent: #a2d175;     /* Specific block borders (greenAccent2Light), no longer btn-secondary border. */
+
+      /* Mapped to specific roles for Tailwind */
+      --page-bg-light: var(--background);
+      --card-bg-light: var(--background); /* Default card bg (e.g. stats items) */
+      --block-secondary-bg-light: var(--background); /* For "Notre Mission" etc. blocks - NOW USES PAGE BACKGROUND */
+      
+      --accent-color-light: var(--primary); /* For primary buttons, main highlights, btn-secondary text */
+      --accent-color-hover-light: #73a544; /* Darkened var(--primary) */
+      
+      --text-primary-light: var(--text);
+      --text-secondary-light: #4a5442; /* Derived from text */
+      
+      --border-color-light: var(--secondary); /* Default border (used by activity cards, etc.) */
+      
+      --highlight-color-light: var(--primary); /* Main highlight color for icons, etc. */
+      --green-accent-2-light: var(--accent); /* For specific borders (blocks) */
+      --green-accent-3-light: #d3e6c0; /* Lighter shade of var(--secondary) for geometric art, btn-secondary bg */
+      --header-height: 5rem;
+    }
+
+    .dark {
+      /* User's New Palette - Dark Theme */
+      --text: #e3efe2;
+      --background: #030a02; /* User specified dark background */
+      --primary: #98db90;   /* Main actions, highlights, accentDark in TW */
+      --secondary: #277d1e; /* Default borderDark in TW. For btn-secondary border */
+      --accent: #4ee03e;    /* Specific block borders (greenAccent2Dark) */
+
+      /* Mapped to specific roles for Tailwind */
+      --page-bg-dark: var(--background);
+      --card-bg-dark: var(--background); /* Default card bg */
+      --block-secondary-bg-dark: var(--background); /* For "Notre Mission" etc. blocks - NOW USES PAGE BACKGROUND */
+
+      --accent-color-dark: var(--primary); /* For btn-secondary text */
+      --accent-color-hover-dark: #88c380; /* Darkened var(--primary) */
+      
+      --text-primary-dark: var(--text);
+      --text-secondary-dark: #b0c0ae; /* Derived from text */
+      
+      --border-color-dark: var(--secondary); /* Default border (user's --secondary for dark) */
+      
+      --highlight-color-dark: var(--primary); /* Main highlight color */
+      --green-accent-2-dark: var(--accent); /* For specific borders (blocks) */
+      --green-accent-3-dark: #1a3b18; /* Darker green for btn-secondary bg dark mode, derived for contrast */
+    }
+
+    ::-webkit-scrollbar {
+      width: 8px; 
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--page-bg-light); 
+    }
+    .dark ::-webkit-scrollbar-track {
+      background: var(--page-bg-dark); 
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--border-color-light); 
+      border-radius: 8px;
+    }
+    .dark ::-webkit-scrollbar-thumb {
+      background: var(--border-color-dark); 
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color-light); 
+    }
+    .dark ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color-dark);
+    }
+    body {
+      font-family: 'Montserrat', sans-serif; 
+      background-color: var(--page-bg-light);
+      color: var(--text-primary-light);
+      line-height: 1.65; 
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .dark body {
+      background-color: var(--page-bg-dark);
+      color: var(--text-primary-dark);
+    }
+    
+    body, .bg-themeColors-pageBgLight, .dark\:bg-themeColors-pageBgDark {
+        transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+    }
+    
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700; 
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(0,0,0,0.02); 
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-track {
+      background: rgba(255,255,255,0.02); 
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--border-color-light); 
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: var(--border-color-dark); 
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color-light);
+    }
+    .dark .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color-dark);
+    }
+    
+    .btn-primary {
+        @apply px-8 py-3.5 rounded-xl font-semibold text-base transition-all duration-300 ease-in-out;
+        @apply bg-themeColors-accentLight text-white dark:bg-themeColors-accentDark dark:text-themeColors-pageBgDark; 
+        @apply hover:bg-themeColors-accentHoverLight dark:hover:bg-themeColors-accentHoverDark; 
+        @apply focus:outline-none focus:ring-4 focus:ring-opacity-50; 
+        @apply focus:ring-themeColors-accentLight dark:focus:ring-themeColors-accentDark;
+        @apply focus:ring-offset-2 focus:ring-offset-themeColors-pageBgLight dark:focus:ring-offset-themeColors-pageBgDark;
+        @apply hover:shadow-md dark:hover:shadow-lg;
+    }
+    .btn-secondary {
+        @apply px-8 py-3.5 rounded-xl font-semibold text-base transition-all duration-300 ease-in-out;
+        /* Light theme styles */
+        @apply bg-themeColors-greenAccent3Light border-2 border-themeColors-borderLight text-themeColors-accentLight;
+        /* Dark theme styles */
+        @apply dark:bg-themeColors-greenAccent3Dark dark:border-themeColors-borderDark dark:text-themeColors-accentDark;
+        
+        @apply hover:bg-themeColors-accentLight dark:hover:bg-themeColors-accentDark;
+        @apply hover:text-white dark:hover:text-themeColors-pageBgDark;
+        @apply hover:border-themeColors-accentLight dark:hover:border-themeColors-accentDark; /* Ensure border color changes on hover too */
+        
+        @apply focus:outline-none focus:ring-4 focus:ring-opacity-50;
+        @apply focus:ring-themeColors-accentLight dark:focus:ring-themeColors-accentDark;
+        /* Offset should be page background for non-transparent buttons as well if they are on pageBg */
+        @apply focus:ring-offset-2 focus:ring-offset-themeColors-pageBgLight dark:focus:ring-offset-themeColors-pageBgDark;
+    }
+
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@^19.1.0",
+    "react/": "https://esm.sh/react@^19.1.0/",
+    "react-router-dom": "https://esm.sh/react-router-dom@^7.6.2",
+    "react-dom/": "https://esm.sh/react-dom@^19.1.0/"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="bg-themeColors-pageBgLight dark:bg-themeColors-pageBgDark text-themeColors-textPrimaryLight dark:text-themeColors-textPrimaryDark">
+  <div id="root"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>
